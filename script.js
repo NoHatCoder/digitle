@@ -192,6 +192,9 @@ export class Game {
 	constructor(rng,difficulty) {
 		this.rng = rng ?? new RNG;
 		//this.target = this.rng.randrange(100, 1000);
+		let base_url = location.origin + location.pathname;
+		let params = new URLSearchParams([['seed', this.rng.seed]]);
+		document.getElementById("puzzle-link").href=base_url + '#' + params.toString()
 		let done=false
 		let a
 		let scale
@@ -624,11 +627,13 @@ export class UI {
 		this.root.querySelector('#button-reset').addEventListener('click', () => {
 			this.reset();
 		});
+		/*
 		this.root.querySelector('#button-copy-link').addEventListener('click', ev => {
 			this.copy_link().then(() => {
 				this.confirm_copy(ev);
 			});
 		});
+		*/
 
 		this.daily_button = this.root.querySelector('#button-daily');
 		this.daily_button.addEventListener('click', () => {
@@ -641,11 +646,13 @@ export class UI {
 			});
 		}
 
+		/*
 		this.root.querySelector('#button-copy-results').addEventListener('click', ev => {
 			this.copy_results().then(() => {
 				this.confirm_copy(ev);
 			});
 		});
+		*/
 
 		// Set up tabs (which are outside the root oops)
 		this.root.querySelector('#button-show-about').addEventListener('click', () => {
